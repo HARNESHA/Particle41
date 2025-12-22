@@ -1,0 +1,16 @@
+{
+  "name": "node-ip-timestamp-app",
+  "version": "1.0.0",
+  "description": "Returns timestamp and client IP",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
