@@ -1,4 +1,3 @@
-````markdown
 # Practical41 – Task 1  
 ## Timestamp Microservice Deployment on Kubernetes (Kind)
 
@@ -59,22 +58,18 @@ docker --version
 kubectl version --client
 kind --version
 ```
-
-![Prerequisites Verification](images/step-2-prerequisites.png)
+<img width="1062" height="205" alt="image" src="https://github.com/user-attachments/assets/06c044d2-cef0-4297-9c95-2138c580980e" />
 
 ---
 
 ## Getting Started
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/HARNESHA/Particle41-Practical.git
+cd Particle41-Practical
 ```
-
-![Repository Cloned](images/step-1-clone.png)
-
 ---
 
 ## Review Configuration Files
@@ -99,8 +94,6 @@ cd <repository-name>
 * Exposes application on port `32000`
 * Accessible from outside the cluster
 
-![Configuration Review](images/step-5-deployment.png)
-
 ---
 
 ## Environment Setup
@@ -111,7 +104,7 @@ cd <repository-name>
 kind create cluster --config kind-cluster.yaml
 ```
 
-![Kind Cluster Creation](images/step-3-kind-cluster.png)
+<img width="1195" height="341" alt="image" src="https://github.com/user-attachments/assets/21f195f2-0ea0-4814-8a3b-d42728897cf3" />
 
 ---
 
@@ -123,7 +116,7 @@ kubectl get nodes
 kubectl get pods -A
 ```
 
-![Cluster Verification](images/step-3-kind-cluster.png)
+<img width="1482" height="567" alt="image" src="https://github.com/user-attachments/assets/24b3f5dc-d040-40ec-925e-c3ba27be07bb" />
 
 ---
 
@@ -136,63 +129,33 @@ kubectl create namespace simple-timestamp
 kubectl get namespaces
 ```
 
-![Namespace Verification](images/step-4-namespace.png)
+<img width="993" height="267" alt="image" src="https://github.com/user-attachments/assets/711e8edc-4c07-4d89-8be1-6b43241d991f" />
 
 ---
 
 ## Deploy the Timestamp Service
 
-### Apply the Kubernetes Manifest
+### Apply the Kubernetes Manifest & Verify Deployed Resources
+Ensure all pods are in the **Running** state.
 
 ```bash
 kubectl apply -f microservice.yaml -n simple-timestamp
 ```
-
-![Deployment Applied](images/step-5-deployment.png)
-
----
-
-### Verify Deployed Resources
-
-```bash
-kubectl get all -n simple-timestamp
-kubectl get pods -n simple-timestamp
-```
-
-Ensure all pods are in the **Running** state.
-
-![Pods Running](images/step-6-pods.png)
-
----
+<img width="1106" height="522" alt="image" src="https://github.com/user-attachments/assets/1828d0cd-4ac6-40e1-91f2-121f43e19561" />
 
 ## Access the Service
 
-### Get Node IP Address
+### Get Node IP Address & Access the Service from Outside the Cluster
 
 ```bash
-kubectl get nodes -o wide
+for i in {1..5}; do
+  for ip in $(kubectl get nodes -o wide --no-headers | awk '{print $6}'); do
+    curl -s --connect-timeout 3 http://$ip:32000 | jq .
+    echo "--------------------------------------------"
+  done
+done
 ```
-
-![Node IP Details](images/step-7-node-ip.png)
-
----
-
-### Access the Service from Outside the Cluster
-
-```bash
-curl http://<NODE_IP>:32000
-```
-
-![Curl Output](images/step-8-curl.png)
-
-#### Sample Response
-
-```json
-{
-  "timestamp": "2025-12-22T13:14:02.593Z",
-  "ip": "172.17.0.1"
-}
-```
+<img width="591" height="582" alt="image" src="https://github.com/user-attachments/assets/f683d10a-bc74-4fa3-a66f-f6261f14456e" />
 
 ---
 
@@ -227,5 +190,3 @@ For production environments, consider:
 * TLS termination
 * Resource limits and autoscaling
 * Centralized logging and monitoring
-
-```
