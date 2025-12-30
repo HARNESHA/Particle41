@@ -1,2 +1,10 @@
 app/node_modules/
 app/npm-debug.log   
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
