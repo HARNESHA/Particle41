@@ -1,5 +1,5 @@
 # Practical41  
-## Timestamp Microservice Deployment on Kubernetes (Kind) – Task 1
+## Minimalist Application Development on Kubernetes (Kind) – Task 1
 
 The objective of this task is to demonstrate:
 
@@ -156,13 +156,145 @@ done
 * Logs written to stdout
 * Separation of Deployment and Service
 
-### Notes
+---
+## Terraform and AWS: create an EKS cluster – Task 2
+---
 
-This setup is intended for development and demonstration purposes.
+### Terraform Deployment Guide (Dev Environment)
 
-For production environments, consider:
+This repository provisions AWS infrastructure using Terraform with a **remote S3 backend**.
 
-* Ingress instead of NodePort
-* TLS termination
-* Resource limits and autoscaling
-* Centralized logging and monitoring
+Directory structure follows a **multi-environment layout**, with `dev` as the active environment.
+
+### Prerequisites
+
+* Terraform ≥ **1.6**
+* AWS CLI ≥ **v2**
+* AWS IAM permissions to:
+
+  * Create S3 buckets
+  * Manage infrastructure resources
+* An AWS account (via assumed role or local credentials)
+
+### Directory Structure (Relevant)
+
+```
+env/
+└── dev/
+    ├── backend.config.hcl
+    ├── main.tf
+    ├── provider.tf
+    └── variables.tf
+
+modules/
+└── eks/
+
+vars/
+└── dev.terraform.tfvars
+```
+
+### Step 1: Create S3 Backend Bucket
+
+Terraform state is stored remotely in an S3 bucket.
+
+Create the bucket **once** before running Terraform:
+
+```bash
+aws s3api create-bucket \
+  --bucket tfstate-dev-Particle41-eks \
+  --region ap-south-1 \
+  --create-bucket-configuration LocationConstraint=ap-south-1
+```
+
+Enable versioning (recommended):
+
+```bash
+aws s3api put-bucket-versioning \
+  --bucket tfstate-dev-Particle41-eks \
+  --versioning-configuration Status=Enabled
+```
+
+---
+
+### Step 2: Update Backend Configuration
+
+Edit the backend configuration file:
+
+**`env/dev/backend.config.hcl`**
+
+```hcl
+bucket  = "tfstate-dev-Particle41-eks"
+key     = "eks/dev/terraform.tfstate"
+region  = "ap-south-1"
+encrypt = true
+```
+
+The bucket name **must be globally unique**.
+
+---
+
+### Step 3: Initialize Terraform & Validate Configuration
+
+
+```bash
+terraform init -backend-config=backend.config.hcl
+terraform validate
+
+```
+
+This will:
+
+* Configure the S3 backend
+* Download required providers
+* Initialize modules
+
+
+### Step 4: Generate Execution Plan &  Apply Infrastructure
+
+This shows all infrastructure changes **before** applying them.
+
+```bash
+terraform plan \
+  -var-file=../../vars/dev.terraform.tfvars \
+  -out=tfplan
+```
+Now apply the infrastructure changes **after reviwing the plan** output.
+Terraform will:
+
+* Create / update AWS resources
+* Store state securely in S3
+
+```bash
+terraform -chdir=env/dev apply tfplan
+```
+
+## Rollback / Changes
+
+* Modify Terraform code
+* Re-run `plan` and `apply`
+* Terraform handles incremental updates safely
+
+To destroy resources & Cleanup (if required):
+
+```bash
+terraform destroy \
+  -var-file=../../vars/dev.terraform.tfvars
+```
+
+---
+
+## Notes
+
+* Backend bucket must exist **before** `terraform init`
+* Do **not** commit Terraform state files
+* This setup is compatible with CI/CD pipelines using AWS AssumeRole (OIDC)
+
+---
+
+## Summary
+
+This workflow ensures:
+
+* Remote state management using S3
+* Clean environment separation
+* Safe, repeatable infrastructure deployments
