@@ -56,17 +56,12 @@ kind --version
 <img width="1062" height="205" alt="image" src="https://github.com/user-attachments/assets/06c044d2-cef0-4297-9c95-2138c580980e" />
 
 
-## Getting Started
-
 ### Clone the Repository
 
 ```bash
 git clone https://github.com/HARNESHA/Particle41-Practical.git
 cd Particle41-Practical
 ```
----
-
-## Review Configuration Files
 
 ### Dockerfile
 
@@ -90,9 +85,7 @@ cd Particle41-Practical
 
 ---
 
-## Environment Setup
-
-### Create a Kind Cluster
+### Environment Setup
 
 ```bash
 kind create cluster --config kind-cluster.yaml
@@ -100,7 +93,6 @@ kind create cluster --config kind-cluster.yaml
 
 <img width="1195" height="341" alt="image" src="https://github.com/user-attachments/assets/21f195f2-0ea0-4814-8a3b-d42728897cf3" />
 
----
 
 ### Verify Cluster Creation
 
@@ -114,8 +106,6 @@ kubectl get pods -A
 
 ---
 
-## Namespace Setup
-
 ### Create a Dedicated Namespace
 
 ```bash
@@ -125,11 +115,10 @@ kubectl get namespaces
 
 <img width="993" height="267" alt="image" src="https://github.com/user-attachments/assets/711e8edc-4c07-4d89-8be1-6b43241d991f" />
 
----
 
-## Deploy the Timestamp Service
+### Deploy the Timestamp Service
 
-### Apply the Kubernetes Manifest & Verify Deployed Resources
+Apply the Kubernetes Manifest & Verify Deployed Resources
 Ensure all pods are in the **Running** state.
 
 ```bash
@@ -137,7 +126,6 @@ kubectl apply -f microservice.yaml -n simple-timestamp
 ```
 <img width="1106" height="522" alt="image" src="https://github.com/user-attachments/assets/1828d0cd-4ac6-40e1-91f2-121f43e19561" />
 
-## Access the Service
 
 ### Get Node IP Address & Access the Service from Outside the Cluster
 
@@ -151,9 +139,7 @@ done
 ```
 <img width="591" height="582" alt="image" src="https://github.com/user-attachments/assets/f683d10a-bc74-4fa3-a66f-f6261f14456e" />
 
----
-
-## Verification Checklist
+### Verification Checklist
 
 * Kind cluster created successfully
 * Namespace `simple-timestamp` created
@@ -161,9 +147,7 @@ done
 * NodePort service exposed on port `32000`
 * Service accessible from outside the cluster
 
----
-
-## Best Practices Followed
+### Best Practices Followed
 
 * Non-root container execution
 * Minimal Docker base image
@@ -172,9 +156,7 @@ done
 * Logs written to stdout
 * Separation of Deployment and Service
 
----
-
-## Notes
+### Notes
 
 This setup is intended for development and demonstration purposes.
 
