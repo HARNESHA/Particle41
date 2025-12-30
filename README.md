@@ -11,7 +11,7 @@ The objective of this task is to demonstrate:
 
 ---
 
-## Overview
+### Overview
 
 The **Timestamp Microservice** is a simple Node.js application that returns:
 
@@ -26,9 +26,7 @@ This repository includes:
 - Kind cluster configuration  
 - Supporting documentation  
 
----
-
-## Repository Structure
+### Repository Structure
 
 ```text
 
@@ -39,9 +37,7 @@ This repository includes:
 └── kind-cluster.yaml
 ````
 
----
-
-## Prerequisites
+### Prerequisites
 
 Ensure the following software is installed with suitable versions:
 
@@ -56,9 +52,9 @@ docker --version
 kubectl version --client
 kind --version
 ```
+
 <img width="1062" height="205" alt="image" src="https://github.com/user-attachments/assets/06c044d2-cef0-4297-9c95-2138c580980e" />
 
----
 
 ## Getting Started
 
