@@ -150,8 +150,13 @@ done
 ### Terraform Deployment Guide (Dev Environment)
 
 This repository provisions AWS infrastructure using Terraform with a **remote S3 backend**.
-
 Directory structure follows a **multi-environment layout**, with `dev` as the active environment.
+
+### Application Diagram
+<img width="1459" height="696" alt="image" src="https://github.com/user-attachments/assets/7a6ccffb-314b-4e2d-9143-d72d1a095066" />
+
+### VPC Networking Map
+<img width="1488" height="427" alt="image" src="https://github.com/user-attachments/assets/e847e845-f96c-457a-82b0-892d0e95e141" />
 
 ### Prerequisites
 
@@ -274,6 +279,8 @@ To destroy resources & Cleanup (if required):
 terraform destroy \
   -var-file=../../vars/dev.terraform.tfvars
 ```
+<img width="1177" height="383" alt="image" src="https://github.com/user-attachments/assets/f650801a-c524-4494-afc5-3e3643034329" />
+<img width="747" height="120" alt="image" src="https://github.com/user-attachments/assets/0274fb74-112a-4bd2-8b55-fcd7bd8a65d3" />
 
 ### Notes
 
