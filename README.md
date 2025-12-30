@@ -1,7 +1,5 @@
-# Practical41 – Task 1  
-## Timestamp Microservice Deployment on Kubernetes (Kind)
-
-This document provides a complete walkthrough for **Task 1 of Practical41**, covering the setup, deployment, and verification of a **Timestamp Microservice** on a Kubernetes cluster using **Kind**, **Docker**, and **kubectl**.
+# Practical41  
+## Timestamp Microservice Deployment on Kubernetes (Kind) – Task 1
 
 The objective of this task is to demonstrate:
 
