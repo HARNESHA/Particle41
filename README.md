@@ -161,6 +161,7 @@ Directory structure follows a **multi-environment layout**, with `dev` as the ac
   * Create S3 buckets
   * Manage infrastructure resources
 * An AWS account (via assumed role or local credentials)
+<img width="785" height="106" alt="image" src="https://github.com/user-attachments/assets/5f3a0205-df73-4309-bda5-3268a5d4ceb4" />
 
 ### Directory Structure (Relevant)
 
@@ -251,7 +252,17 @@ terraform output
 <img width="781" height="143" alt="image" src="https://github.com/user-attachments/assets/63ceca56-e366-4aa5-a45e-a8e29431fe0f" />
 <img width="1145" height="245" alt="image" src="https://github.com/user-attachments/assets/c658279e-c18b-4d62-a028-16dea1a01c7d" />
 
-## Rollback / Changes
+### Step 5: Access the cluster & Deploy the application
+
+```bash
+aws eks update-kubeconfig --name PracticeApp-Eks-cluster --region ap-south-1
+kubectl apply -f microservice.yaml
+```
+<img width="1136" height="142" alt="image" src="https://github.com/user-attachments/assets/8c12a0c3-35de-4ee3-8e22-f7a2233f1dd8" />
+<img width="742" height="326" alt="image" src="https://github.com/user-attachments/assets/ffb2c5d5-01a8-47df-b3b2-2e1becf3ca59" />
+
+
+### Rollback / Changes
 
 * Modify Terraform code
 * Re-run `plan` and `apply`
@@ -264,7 +275,7 @@ terraform destroy \
   -var-file=../../vars/dev.terraform.tfvars
 ```
 
-## Notes
+### Notes
 
 * Backend bucket must exist **before** `terraform init`
 * Do **not** commit Terraform state files
