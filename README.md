@@ -158,7 +158,6 @@ Directory structure follows a **multi-environment layout**, with `dev` as the ac
 * Terraform ≥ **1.6**
 * AWS CLI ≥ **v2**
 * AWS IAM permissions to:
-
   * Create S3 buckets
   * Manage infrastructure resources
 * An AWS account (via assumed role or local credentials)
@@ -223,12 +222,12 @@ terraform init -backend-config=backend.config.hcl
 terraform validate
 
 ```
-
 This will:
 
 * Configure the S3 backend
 * Download required providers
 * Initialize modules
+<img width="951" height="320" alt="image" src="https://github.com/user-attachments/assets/6666b5e3-8aa2-4d95-a41d-97c928e9f4cc" />
 
 ### Step 4: Generate Execution Plan &  Apply Infrastructure
 
@@ -246,8 +245,11 @@ Terraform will:
 * Store state securely in S3
 
 ```bash
-terraform -chdir=env/dev apply tfplan
+terraform apply tfplan
+terraform output
 ```
+<img width="781" height="143" alt="image" src="https://github.com/user-attachments/assets/63ceca56-e366-4aa5-a45e-a8e29431fe0f" />
+<img width="1145" height="245" alt="image" src="https://github.com/user-attachments/assets/c658279e-c18b-4d62-a028-16dea1a01c7d" />
 
 ## Rollback / Changes
 
