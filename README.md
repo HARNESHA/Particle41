@@ -1,4 +1,5 @@
 # Practical41  
+---
 ## Minimalist Application Development on Kubernetes (Kind) – Task 1
 
 The objective of this task is to demonstrate:
@@ -8,8 +9,6 @@ The objective of this task is to demonstrate:
 - Namespace isolation  
 - Service exposure using NodePort  
 - Verification from outside the cluster  
-
----
 
 ### Overview
 
@@ -83,8 +82,6 @@ cd Particle41-Practical
 * Exposes application on port `32000`
 * Accessible from outside the cluster
 
----
-
 ### Environment Setup
 
 ```bash
@@ -93,8 +90,7 @@ kind create cluster --config kind-cluster.yaml
 
 <img width="1195" height="341" alt="image" src="https://github.com/user-attachments/assets/21f195f2-0ea0-4814-8a3b-d42728897cf3" />
 
-
-### Verify Cluster Creation
+Verify Cluster Creation with below commads.
 
 ```bash
 kubectl cluster-info
@@ -104,26 +100,18 @@ kubectl get pods -A
 
 <img width="1482" height="567" alt="image" src="https://github.com/user-attachments/assets/24b3f5dc-d040-40ec-925e-c3ba27be07bb" />
 
----
-
-### Create a Dedicated Namespace
+### Create a Dedicated Namespace & Deploy the Timestamp Service
+* Create a new namespace
+* Apply the Kubernetes Manifest & Verify Deployed Resources
+* Ensure all pods are in the **Running** state
 
 ```bash
 kubectl create namespace simple-timestamp
 kubectl get namespaces
-```
-
-<img width="993" height="267" alt="image" src="https://github.com/user-attachments/assets/711e8edc-4c07-4d89-8be1-6b43241d991f" />
-
-
-### Deploy the Timestamp Service
-
-Apply the Kubernetes Manifest & Verify Deployed Resources
-Ensure all pods are in the **Running** state.
-
-```bash
 kubectl apply -f microservice.yaml -n simple-timestamp
 ```
+<img width="993" height="267" alt="image" src="https://github.com/user-attachments/assets/711e8edc-4c07-4d89-8be1-6b43241d991f" />
+
 <img width="1106" height="522" alt="image" src="https://github.com/user-attachments/assets/1828d0cd-4ac6-40e1-91f2-121f43e19561" />
 
 
