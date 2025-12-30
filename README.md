@@ -274,6 +274,8 @@ To destroy resources & Cleanup (if required):
 terraform destroy \
   -var-file=../../vars/dev.terraform.tfvars
 ```
+<img width="1177" height="383" alt="image" src="https://github.com/user-attachments/assets/f650801a-c524-4494-afc5-3e3643034329" />
+<img width="747" height="120" alt="image" src="https://github.com/user-attachments/assets/0274fb74-112a-4bd2-8b55-fcd7bd8a65d3" />
 
 ### Notes
 
