@@ -146,7 +146,6 @@ done
 
 ---
 ## Terraform and AWS: create an EKS cluster – Task 2
----
 
 ### Terraform Deployment Guide (Dev Environment)
 
@@ -202,8 +201,6 @@ aws s3api put-bucket-versioning \
   --versioning-configuration Status=Enabled
 ```
 
----
-
 ### Step 2: Update Backend Configuration
 
 Edit the backend configuration file:
@@ -219,10 +216,7 @@ encrypt = true
 
 The bucket name **must be globally unique**.
 
----
-
 ### Step 3: Initialize Terraform & Validate Configuration
-
 
 ```bash
 terraform init -backend-config=backend.config.hcl
@@ -235,7 +229,6 @@ This will:
 * Configure the S3 backend
 * Download required providers
 * Initialize modules
-
 
 ### Step 4: Generate Execution Plan &  Apply Infrastructure
 
@@ -269,15 +262,11 @@ terraform destroy \
   -var-file=../../vars/dev.terraform.tfvars
 ```
 
----
-
 ## Notes
 
 * Backend bucket must exist **before** `terraform init`
 * Do **not** commit Terraform state files
 * This setup is compatible with CI/CD pipelines using AWS AssumeRole (OIDC)
-
----
 
 ## Summary
 
